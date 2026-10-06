@@ -1932,3 +1932,99 @@ ul, ol {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ======================================================================
+   DARK ATMOSPHERE UPDATE — deep forest / midnight solar palette
+   ====================================================================== */
+:root {
+  --color-primary: #10251F;
+  --color-primary-light: #1A3930;
+  --color-primary-dark: #07130F;
+  --color-accent: #F5B942;
+  --color-accent-hover: #D99A22;
+  --color-accent-light: #302719;
+  --color-savings: #70D6A0;
+  --color-savings-bg: #183328;
+  --color-savings-dark: #91E5B5;
+  --color-bg-light: #0A100F;
+  --color-bg-alt: #101A17;
+  --color-card: #14211D;
+  --color-card-border: #293A33;
+  --color-placeholder-bg: #17231F;
+  --color-placeholder-border: #3B5047;
+  --color-text-title: #F1F4EE;
+  --color-text-body: #D0D9D3;
+  --color-text-muted: #9AA9A1;
+  --color-text-white: #FFFFFF;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.22);
+  --shadow-md: 0 8px 22px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 14px 34px rgba(0, 0, 0, 0.34);
+  --shadow-card-hover: 0 14px 30px rgba(0, 0, 0, 0.38);
+}
+
+body {
+  background-color: var(--color-bg-light);
+  color: var(--color-text-body);
+}
+
+/* Replace a few light surfaces that were hard-coded in the original theme. */
+.hero-section,
+section {
+  color: var(--color-text-body);
+}
+.section-tag {
+  color: var(--color-accent);
+  background: rgba(245, 185, 66, 0.09);
+  border-color: rgba(245, 185, 66, 0.28);
+}
+.section-title,
+.hero-title,
+.hero-heading,
+.card-title,
+.service-title,
+.feature-title,
+.faq-question,
+.contact-title {
+  color: var(--color-text-title);
+}
+.section-subtitle,
+.hero-description,
+.card-description,
+.service-description {
+  color: var(--color-text-muted);
+}
+
+/* Keep panels and form controls legible in the darker palette. */
+input, textarea, select,
+.form-control,
+.faq-item,
+.service-card,
+.feature-card,
+.gallery-item,
+.contact-card,
+.stat-card,
+.savings-card,
+.testimonial-card {
+  color: var(--color-text-body);
+  border-color: var(--color-card-border);
+}
+input, textarea, select {
+  background-color: #0D1713;
+}
+input::placeholder, textarea::placeholder {
+  color: #7F9187;
+}
+
+/* Header and section transitions feel more cinematic, without reducing contrast. */
+.site-header {
+  background: rgba(10, 16, 15, 0.94);
+  border-bottom-color: rgba(154, 169, 161, 0.14);
+  backdrop-filter: blur(14px);
+}
+.hero-section {
+  background: radial-gradient(ellipse at 78% 18%, rgba(44, 86, 66, 0.28), transparent 42%),
+              linear-gradient(135deg, #07100D 0%, #0D1914 58%, #13251D 100%);
+}
+.section:nth-of-type(even) {
+  background-color: var(--color-bg-alt);
+}
