@@ -1902,3 +1902,33 @@ ul, ol {
     padding: 1.5rem 1rem;
   }
 }
+
+/* ==========================================================================
+   MOTION: one gentle hero fade-in on load, fully disabled for users who
+   prefer reduced motion
+   ========================================================================== */
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+.hero-content {
+  animation: heroFadeIn 0.8s ease-out both;
+}
+
+.hero-visual {
+  animation: heroFadeIn 0.8s ease-out 0.15s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,7 +1,7 @@
 /**
  * ============================================================================
  * SUNVOLT SOLAR SOLUTIONS - JAVASCRIPT
- * Flat 2D Vanilla JavaScript | Strict 2D Rules
+ * Flat 2D Vanilla JavaScript | Sustainable Luxury Solar System
  * ============================================================================
  */
 
@@ -14,11 +14,11 @@ const BUSINESS_CONFIG = {
   shortName: "SunVolt",
   tagline: "Power your home with the sun.",
   location: "Kachehri Road, Dharamshala, Himachal Pradesh",
-  phone: "+91 98765 43210",
-  phoneRaw: "+919876543210",
-  whatsapp: "+91 98765 43210",
-  whatsappUrl: "https://wa.me/919876543210",
-  email: "hello@sunvoltsolar.com",
+  phone: "+91 00000 00000",
+  phoneRaw: "+910000000000",
+  whatsapp: "+91 00000 00000",
+  whatsappUrl: "https://wa.me/910000000000",
+  email: "hello@yourbusiness.com",
   hours: "9 AM to 7 PM, Monday to Saturday. Free site visit on request."
 };
 
@@ -37,7 +37,6 @@ function applyBusinessSettings() {
   });
 
   document.querySelectorAll('[data-business="tagline"]').forEach(el => {
-    // Preserve any custom leading/trailing sentence structure if needed, or set standard
     if (el.classList.contains('hero-subtext')) {
       el.textContent = `${BUSINESS_CONFIG.tagline} Premium rooftop solar installations engineered for Dharamshala homes and businesses.`;
     } else {
@@ -82,7 +81,78 @@ function applyBusinessSettings() {
 }
 
 // ============================================================================
-// 3. SAVINGS CALCULATOR ENGINE
+// 3. ANIMATED COUNT-UP FOR HIGHLIGHT NUMBERS (INTERSECTION OBSERVER)
+// Respects prefers-reduced-motion
+// ============================================================================
+function initCountUp() {
+  const statElements = document.querySelectorAll('[data-count]');
+  if (!statElements.length) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const targetValue = parseFloat(el.getAttribute('data-count'));
+        const prefix = el.getAttribute('data-prefix') || '';
+        const suffix = el.getAttribute('data-suffix') || '';
+        const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+        
+        if (prefersReducedMotion) {
+          el.textContent = prefix + (decimals > 0 ? targetValue.toFixed(decimals) : Math.round(targetValue)) + suffix;
+        } else {
+          animateNumber(el, targetValue, decimals, prefix, suffix, 1500);
+        }
+        obs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  statElements.forEach(el => observer.observe(el));
+}
+
+function animateNumber(element, target, decimals, prefix, suffix, duration) {
+  const startTime = performance.now();
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    // Smooth ease-out cubic curve
+    const easeOut = 1 - Math.pow(1 - progress, 3);
+    const currentVal = target * easeOut;
+    
+    element.textContent = prefix + (decimals > 0 ? currentVal.toFixed(decimals) : Math.round(currentVal)) + suffix;
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      element.textContent = prefix + (decimals > 0 ? target.toFixed(decimals) : Math.round(target)) + suffix;
+    }
+  }
+  requestAnimationFrame(update);
+}
+
+// ============================================================================
+// 4. NAVBAR SCROLL BLUR / SOLID BACKGROUND EFFECT
+// ============================================================================
+function initNavbarScroll() {
+  const header = document.getElementById('header');
+  if (!header) return;
+
+  function onScroll() {
+    if (window.scrollY > 20) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+// ============================================================================
+// 5. SAVINGS CALCULATOR ENGINE
 // Formula Assumptions:
 // - Rate: ~Rs 8 per unit (kWh)
 // - Generation: ~120 units per kW per month
@@ -102,12 +172,12 @@ function initSavingsCalculator() {
 
   if (!numberInput || !rangeSlider) return;
 
-  // Format currency in Indian locale (e.g. ₹ 4,000)
+  // Format currency in Indian locale (e.g. ₹4,000)
   function formatRupees(num) {
     return '₹' + Math.round(num).toLocaleString('en-IN');
   }
 
-  // Format Lakhs / Crores for lifetime
+  // Format Lakhs for lifetime
   function formatLakhs(num) {
     const lakhs = (num / 100000).toFixed(1);
     return `Over ₹${lakhs} Lakhs saved across 25 years`;
@@ -205,8 +275,8 @@ function initSavingsCalculator() {
 }
 
 // ============================================================================
-// 4. FAQ ACCORDION COMPONENT
-// Clean, accessible, click-to-expand list with aria-expanded attributes
+// 6. FAQ ACCORDION COMPONENT
+// Accessible click-to-expand list with aria-expanded attributes
 // ============================================================================
 function initFaqAccordion() {
   const faqButtons = document.querySelectorAll('.faq-question-btn');
@@ -242,7 +312,7 @@ function initFaqAccordion() {
 }
 
 // ============================================================================
-// 5. MOBILE NAVIGATION MENU (HAMBURGER)
+// 7. MOBILE NAVIGATION MENU (HAMBURGER)
 // ============================================================================
 function initMobileNavigation() {
   const hamburgerBtn = document.getElementById('hamburger-toggle');
@@ -294,8 +364,8 @@ function initMobileNavigation() {
 }
 
 // ============================================================================
-// 6. CONTACT ENQUIRY FORM HANDLER
-// Validates inputs and shows "Thanks, we will call you soon"
+// 8. CONTACT ENQUIRY FORM HANDLER
+// Validates inputs and shows "Thanks, we will call you soon" message
 // ============================================================================
 function initContactForm() {
   const form = document.getElementById('enquiry-form');
@@ -355,17 +425,12 @@ function initContactForm() {
       // Reset submit button
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalBtnText;
-
-      // Automatically hide banner after 8 seconds (optional polish)
-      setTimeout(() => {
-        // Banner stays visible or can be dismissed if desired
-      }, 8000);
     }, 400);
   });
 }
 
 // ============================================================================
-// 7. ACTIVE NAVIGATION ON SCROLL
+// 9. ACTIVE NAVIGATION ON SCROLL (SCROLLSPY)
 // Updates active class in desktop navbar based on current scroll position
 // ============================================================================
 function initScrollSpy() {
@@ -376,7 +441,7 @@ function initScrollSpy() {
 
   function updateActiveLink() {
     const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-    const headerOffset = 120;
+    const headerOffset = 100;
 
     sections.forEach(section => {
       const sectionTop = section.offsetTop - headerOffset;
@@ -399,10 +464,12 @@ function initScrollSpy() {
 }
 
 // ============================================================================
-// 8. INITIALIZE APPLICATION
+// 10. INITIALIZE APPLICATION
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
   applyBusinessSettings();
+  initCountUp();
+  initNavbarScroll();
   initSavingsCalculator();
   initFaqAccordion();
   initMobileNavigation();
