@@ -2028,3 +2028,110 @@ input::placeholder, textarea::placeholder {
 .section:nth-of-type(even) {
   background-color: var(--color-bg-alt);
 }
+
+/* ======================================================================
+   DARK THEME CONTRAST FIXES
+   ====================================================================== */
+.brand-name,
+.brand-sun,
+.nav-link:hover,
+.nav-link.active,
+.mobile-nav-link,
+.mobile-contact-quick,
+.hamburger-bar,
+.badge-title,
+.form-title,
+.form-label,
+.service-card-title,
+.card-title,
+.feature-title,
+.contact-title {
+  color: var(--color-text-title);
+}
+
+.brand-name .brand-sun,
+.brand-sun {
+  color: var(--color-text-title);
+}
+
+.nav-link:hover,
+.nav-link.active,
+.mobile-nav-link:hover,
+.mobile-contact-quick:hover {
+  color: var(--color-accent);
+}
+
+.hamburger-bar {
+  background-color: var(--color-text-title);
+}
+
+.hero-placeholder {
+  background-color: var(--color-placeholder-bg);
+  border-color: var(--color-placeholder-border);
+  color: var(--color-text-muted);
+}
+
+/* Override legacy light surfaces that otherwise flash bright or wash out text. */
+.image-placeholder,
+.gallery-placeholder,
+.map-placeholder {
+  background-color: var(--color-placeholder-bg);
+  border-color: var(--color-placeholder-border);
+  color: var(--color-text-muted);
+}
+
+/* Dark text used by older components must become readable on dark cards. */
+.card,
+.feature-card,
+.contact-card,
+.stat-card,
+.savings-card,
+.testimonial-card,
+.faq-item,
+.service-card {
+  color: var(--color-text-body);
+  background-color: var(--color-card);
+}
+
+.card a,
+.feature-card a,
+.contact-card a,
+.stat-card a,
+.savings-card a,
+.testimonial-card a,
+.faq-item a,
+.service-card a {
+  color: var(--color-accent);
+}
+
+/* Form labels and helper text */
+.form-label { color: var(--color-text-title); }
+.form-title { color: var(--color-text-title); }
+.form-control { color: var(--color-text-body); background-color: #0D1713; }
+.form-control::placeholder { color: #9AA9A1; }
+
+/* Legacy hard-coded light backgrounds */
+.hero-section {
+  background: radial-gradient(ellipse at 78% 18%, rgba(44, 86, 66, 0.28), transparent 42%),
+              linear-gradient(135deg, #07100D 0%, #0D1914 58%, #13251D 100%);
+}
+
+/* Footer secondary text gets a little more contrast. */
+.site-footer { color: #D0D9D3; }
+.footer-desc,
+.footer-bottom-bar { color: #AAB8B0; }
+.footer-links a,
+.footer-meta-item { color: #D0D9D3; }
+.footer-links a:hover,
+.footer-meta-item a:hover { color: var(--color-accent); }
+
+/* Preserve readable white text on accent buttons. */
+.btn-primary,
+.btn-accent,
+.btn-nav { color: var(--color-primary-dark); }
+
+/* Accessibility: clear keyboard focus against the dark palette. */
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
